@@ -2,10 +2,12 @@ package fr.cesi.bibliotheque.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -20,12 +22,14 @@ public class Reunion {
 	
 	@OneToMany
 	private Tache tache;
-	//Référence
+
+	// Référence
 	@OneToOne
-	private Collaborateur collaborateur;
-	//Participe
+	private Collaborateur collaborateurReferent;
+
+	// Participe
 	@ManyToMany
-	private List<Collaborateur> collaborateur = new ArrayList<>();
+	private List<Collaborateur> collaborateursParticipants = new ArrayList<Collaborateur>();
 	
 	public Reunion() {
 	}
@@ -56,5 +60,29 @@ public class Reunion {
 	}
 	public int getId() {
 		return id;
+	}
+
+	public Tache getTache() {
+		return tache;
+	}
+
+	public void setTache(Tache tache) {
+		this.tache = tache;
+	}
+
+	public Collaborateur getCollaborateurReferent() {
+		return collaborateurReferent;
+	}
+
+	public void setCollaborateurReferent(Collaborateur collaborateurReferent) {
+		this.collaborateurReferent = collaborateurReferent;
+	}
+
+	public List<Collaborateur> getCollaborateursParticipants() {
+		return collaborateursParticipants;
+	}
+
+	public void setCollaborateursParticipants(List<Collaborateur> collaborateursParticipants) {
+		this.collaborateursParticipants = collaborateursParticipants;
 	}
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 public class Tache {
@@ -16,8 +16,9 @@ public class Tache {
 	private String nom ;
 	private String description ;
 	
-	@OneToMany
+	@ManyToMany(mappedBy="taches")
 	private Collaborateur collaborateur;
+
 	@OneToOne
 	private Reunion reunion;
 
@@ -44,5 +45,21 @@ public class Tache {
 	}
 	public int getId() {
 		return id;
+	}
+
+	public Collaborateur getCollaborateur() {
+		return collaborateur;
+	}
+
+	public void setCollaborateur(Collaborateur collaborateur) {
+		this.collaborateur = collaborateur;
+	}
+
+	public Reunion getReunion() {
+		return reunion;
+	}
+
+	public void setReunion(Reunion reunion) {
+		this.reunion = reunion;
 	}
 }

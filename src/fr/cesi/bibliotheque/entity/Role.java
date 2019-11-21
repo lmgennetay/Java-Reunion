@@ -36,6 +36,12 @@ public class Role implements Serializable {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
 
+	public Collaborateur getCollaborateur() {
+		return collaborateur;
+	}
+
+	public void setCollaborateur(Collaborateur collaborateur) {
+		this.collaborateur = collaborateur;
+	}
 }

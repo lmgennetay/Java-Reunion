@@ -1,11 +1,14 @@
 package fr.cesi.bibliotheque.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,8 +21,13 @@ public class Collaborateur implements Serializable {
 	private String prenom;
 	private String mail;
 	
+	@ManyToOne
+	private Role role;
+	
+	@ManyToMany
+	private Collection<Tache> taches;
+	
 	public Collaborateur() {
-		
 	}
 
 	public String getNom() {
@@ -44,5 +52,21 @@ public class Collaborateur implements Serializable {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public Collection<Tache> getTaches() {
+		return taches;
+	}
+
+	public void setTaches(Collection<Tache> taches) {
+		this.taches = taches;
 	}
 }
