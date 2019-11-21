@@ -16,16 +16,16 @@ import fr.cesi.bibliotheque.entity.Collaborateur;
 import fr.cesi.bibliotheque.entity.Role;
 
 /**
- * Servlet implementation class addCollaborateur
+ * Servlet implementation class updateCollaborateurServlet
  */
-@WebServlet("/addCollaborateur")
-public class addCollaborateurServlet extends HttpServlet {
+@WebServlet("/updateCollaborateurServlet")
+public class updateCollaborateurServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public addCollaborateurServlet() {
+    public updateCollaborateurServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,28 +34,31 @@ public class addCollaborateurServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		JpaCollaborateurDao jpaCollaborateurDao = (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
-		if ( request.getParameter("titre") != null ) {
+		if (request.getParameter("id") != null) {
+			int idParam = Integer.parseInt(request.getParameter("id"));
+			String nom = request.getParameter("nom");
+			String prenom = request.getParameter("prenom");
+			String mail = request.getParameter("mail");
 			//Recuperation du role
 			int id_role = Integer.parseInt(request.getParameter("role"));   
 			JpaRoleDao jpaRoleDao  =  (JpaRoleDao) DaoFactory.RoleDF();
-			Role role = jpaRoleDao.findRoleById(id_role);	
-			//Creation du collaborateur
-			Collaborateur collaborateur = new Collaborateur();
-			collaborateur.setNom(request.getParameter("nom"));
-			collaborateur.setPrenom(request.getParameter("prenom"));
-			collaborateur.setMail(request.getParameter("mail"));
+			Role role = jpaRoleDao.findRoleById(id_role);
+			//Traitement de la mise à jour
+			JpaCollaborateurDao jpaCollaborateurDao  =  (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
+			Collaborateur collaborateur = jpaCollaborateurDao.findCollaborateurById(idParam);
+			System.out.println(collaborateur.getId());
+			collaborateur.setNom(nom);
+			collaborateur.setPrenom(prenom);
+			collaborateur.setMail(mail);
 			collaborateur.setRole(role);
-			
-			jpaCollaborateurDao.addCollaborateur(collaborateur);
+
+			jpaCollaborateurDao.updateCollaborateur(collaborateur);
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/menuAdmin.jsp");
         	rs.forward(request, response);
 		} else {
-			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/addCollaborateur.jsp");
-        	rs.forward(request, response);
+			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/selectCollaborateur.jsp");
+			rs.forward(request, response);
 		}
-		
 	}
 
 	/**

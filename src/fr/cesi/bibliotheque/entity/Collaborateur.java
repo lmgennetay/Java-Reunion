@@ -24,7 +24,7 @@ public class Collaborateur implements Serializable {
 	@ManyToOne
 	private Role role;
 	
-	@ManyToMany
+	@ManyToMany(inversedBy="collaborateurs", cascade="{persist}")
 	private Collection<Tache> taches;
 	
 	public Collaborateur() {
