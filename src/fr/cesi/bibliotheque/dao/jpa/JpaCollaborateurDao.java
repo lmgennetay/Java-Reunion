@@ -9,23 +9,32 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import fr.cesi.bibliotheque.entity.Role;
+import fr.cesi.bibliotheque.entity.Collaborateur;
 
+/**
+ * CRUD de Collaborateur
+ * @author Quentin
+ *
+ */
 public class JpaCollaborateurDao {
 private EntityManagerFactory emf;
 	
-	private static List<Role> roles = new ArrayList<Role>();
+	private static List<Collaborateur> collaborateurs = new ArrayList<Collaborateur>();
 	
 	public JpaCollaborateurDao( EntityManagerFactory emf) {
 		this.emf = emf;
 	}
 	
-	public void addCollaborateur(Role role) {
+	/**
+	 * Ajoute un collaborateur
+	 * @param collaborateur
+	 */
+	public void addCollaborateur(Collaborateur collaborateur) {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction t = em.getTransaction();
 		try {
 			t.begin();
-				em.persist(role);
+				em.persist(collaborateur);
 			t.commit();
 		} finally {
 			if (t.isActive()) t.rollback();
@@ -33,49 +42,71 @@ private EntityManagerFactory emf;
 		}
 	}
 	
-	public void updateCollaborateur(Role role) {
-		int index = getRoleIndexById(role.getId());
+	/**
+	 * Met à jour un collaborateur
+	 * @param collaborateur
+	 */
+	public void updateCollaborateur(Collaborateur collaborateur) {
+		int index = getCollaborateurIndexById(collaborateur.getId());
 		if(index > -1) {
-			roles.set(index, role);
+			collaborateurs.set(index, collaborateur);
 		} else {
-			System.out.println(role.getId());
+			System.out.println(collaborateur.getId());
 		}
 	}	
 	
-	public Role findRoleById(int id) {
+	/**
+	 * Trouve un collaborateur via son id
+	 * @param id
+	 * @return
+	 */
+	public Collaborateur findCollaborateurById(int id) {
 		EntityManager em = emf.createEntityManager();		
-		Role role = em.find(Role.class, id);
+		Collaborateur collaborateur = em.find(Collaborateur.class, id);
 		em.close();
-		return role;
+		return collaborateur;
 	}
 	
-	public Collection<Role> getAllRoles() {
+	/**
+	 * Liste tous les collaborateurs
+	 * @return
+	 */
+	public Collection<Collaborateur> getAllCollaborateurs() {
 		EntityManager em = emf.createEntityManager();
 		Query query = em.createQuery("FROM Collaborateur l");
 		System.out.println(query);
-		Collection res = (Collection<Role>) query.getResultList();
+		Collection res = (Collection<Collaborateur>) query.getResultList();
 		em.close();
 	    return res;
 	}
 	
-	public void removeRole(Role role) {
-		removeRole(role.getId());
+	/**
+	 * Supprime un collaborateur
+	 * @param collaborateur
+	 */
+	public void removeCollaborateur(Collaborateur collaborateur) {
+		removeCollaborateur(collaborateur.getId());
 	}	
 	
-	public void removeRole(int id){
+	public void removeCollaborateur(int id){
         System.out.println("Id removeCollaborateur"+id);
         EntityManager em = emf.createEntityManager();
-        Role role = em.find(Role.class, id);
+        Collaborateur collaborateur = em.find(Collaborateur.class, id);
         em.getTransaction().begin();;
         System.out.println("em"+em);
-        em.remove(role);
+        em.remove(collaborateur);
         em.getTransaction().commit();
 	}
 	
-	public int getRoleIndexById(int id) {
-		for (int i = 0; i < roles.size(); i++) {
-			Role role = roles.get(i);
-			if(role.getId() == id) {
+	/**
+	 * Trouve un collaborateur via son id
+	 * @param id
+	 * @return
+	 */
+	public int getCollaborateurIndexById(int id) {
+		for (int i = 0; i < collaborateurs.size(); i++) {
+			Collaborateur collaborateur = collaborateurs.get(i);
+			if(collaborateur.getId() == id) {
 				return i;
 			}
 		}

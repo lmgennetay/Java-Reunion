@@ -29,6 +29,10 @@ public class Collaborateur implements Serializable {
 	
 	public Collaborateur() {
 	}
+	
+	public int getId() {
+		return id;
+	}
 
 	public String getNom() {
 		return nom;

@@ -1,8 +1,9 @@
 package fr.cesi.bibliotheque.dao;
 
-import fr.cesi.bibliotheque.dao.jpa.JpaLivreDao;
+import fr.cesi.bibliotheque.dao.jpa.JpaCollaborateurDao;
 import fr.cesi.bibliotheque.dao.jpa.JpaRoleDao;
-import fr.cesi.bibliotheque.dao.jpa.JpaUserDao;
+import fr.cesi.bibliotheque.dao.jpa.JpaReunionDao;
+import fr.cesi.bibliotheque.dao.jpa.JpaTacheDao;
 import fr.cesi.bibliotheque.util.PersistenceManager;
 
 public class DaoFactory {
@@ -14,6 +15,14 @@ public class DaoFactory {
 	}
 	
 	public static JpaCollaborateurDao CollaborateurDF() {
+		return new JpaCollaborateurDao( PersistenceManager.getEntityManagerFactory() );
+	}
+	
+	public static JpaReunionDao ReunionDF() {
+		return new JpaCollaborateurDao( PersistenceManager.getEntityManagerFactory() );
+	}
+	
+	public static JpaTacheDao TacheDF() {
 		return new JpaCollaborateurDao( PersistenceManager.getEntityManagerFactory() );
 	}
 }

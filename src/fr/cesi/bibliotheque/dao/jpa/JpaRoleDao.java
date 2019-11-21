@@ -11,6 +11,11 @@ import javax.persistence.Query;
 
 import fr.cesi.bibliotheque.entity.Role;
 
+/**
+ * CRUD Role
+ * @author Quentin
+ *
+ */
 public class JpaRoleDao {
 	private EntityManagerFactory emf;
 	
@@ -20,7 +25,11 @@ public class JpaRoleDao {
 		this.emf = emf;
 	}
 	
-	public void addLivre(Role role) {
+	/**
+	 * Ajoute un role
+	 * @param role
+	 */
+	public void addRole(Role role) {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction t = em.getTransaction();
 		try {
@@ -33,7 +42,11 @@ public class JpaRoleDao {
 		}
 	}
 	
-	public void updateLivre(Role role) {
+	/**
+	 * Met à jour un role
+	 * @param role
+	 */
+	public void updateRole(Role role) {
 		int index = getRoleIndexById(role.getId());
 		if(index > -1) {
 			roles.set(index, role);
@@ -42,6 +55,11 @@ public class JpaRoleDao {
 		}
 	}	
 	
+	/**
+	 * Trouve un role via son ID
+	 * @param id
+	 * @return
+	 */
 	public Role findRoleById(int id) {
 		EntityManager em = emf.createEntityManager();		
 		Role role = em.find(Role.class, id);
@@ -49,15 +67,23 @@ public class JpaRoleDao {
 		return role;
 	}
 	
+	/**
+	 * Liste tous les roles
+	 * @return
+	 */
 	public Collection<Role> getAllRoles() {
 		EntityManager em = emf.createEntityManager();
-		Query query = em.createQuery("FROM Livre l");
+		Query query = em.createQuery("FROM Role l");
 		System.out.println(query);
 		Collection res = (Collection<Role>) query.getResultList();
 		em.close();
 	    return res;
 	}
 	
+	/**
+	 * Supprime un role
+	 * @param role
+	 */
 	public void removeRole(Role role) {
 		removeRole(role.getId());
 	}	
@@ -72,6 +98,11 @@ public class JpaRoleDao {
         em.getTransaction().commit();
 	}
 	
+	/**
+	 * Trouve l'index d'un role via son ID
+	 * @param id
+	 * @return
+	 */
 	public int getRoleIndexById(int id) {
 		for (int i = 0; i < roles.size(); i++) {
 			Role role = roles.get(i);
