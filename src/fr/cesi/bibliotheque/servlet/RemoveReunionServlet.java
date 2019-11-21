@@ -10,17 +10,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import fr.cesi.bibliotheque.dao.DaoFactory;
-import fr.cesi.bibliotheque.dao.jpa.JpaCollaborateurDao;
-import fr.cesi.bibliotheque.entity.Collaborateur;
+import fr.cesi.bibliotheque.dao.jpa.JpaReunionDao;
+import fr.cesi.bibliotheque.entity.Reunion;
 
 
 /**
- * Servlet implementation class RemoveCollaborateurServlet
+ * Servlet implementation class RemoveReunionServlet
  */
-@WebServlet("/removeCollaborateur")
-public class removeCollaborateurServlet extends HttpServlet {
+@WebServlet("/removeReunion")
+public class RemoveReunionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	/**
@@ -35,7 +34,7 @@ public class removeCollaborateurServlet extends HttpServlet {
      * @return 
      * @see HttpServlet#HttpServlet()
      */
-    public removeCollaborateurServlet() {
+    public RemoveReunionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -68,20 +67,20 @@ public class removeCollaborateurServlet extends HttpServlet {
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		super.service(request, response);
 		
-		JpaCollaborateurDao jpaCollaborateurDao  =  (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
-		Collection<Collaborateur> collaborateurs = jpaCollaborateurDao.getAllCollaborateurs();
-		System.out.println(collaborateurs);
-		request.setAttribute("collaborateurs", collaborateurs);
+		JpaReunionDao jpaReunionDao  =  (JpaReunionDao) DaoFactory.ReunionDF();
+		Collection<Reunion> reunions = jpaReunionDao.getAllReunions();
+		System.out.println(reunions);
+		request.setAttribute("reunions", reunions);
         
 		if ( request.getParameter("id") != null ){
 			int id = Integer.parseInt(request.getParameter("id"));
-			jpaCollaborateurDao.removeCollaborateur(id);
+			jpaReunionDao.removeReunion(id);
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/MenuAdmin.jsp");
 			rs.forward(request, response);
 		}
 		else
 		{
-			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/removeCollaborateur.jsp");
+			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/removeReunion.jsp");
 			rs.forward(request, response);
 		}        
 	}	
