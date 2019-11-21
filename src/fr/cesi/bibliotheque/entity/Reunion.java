@@ -67,12 +67,12 @@ public class Reunion {
 		return id;
 	}
 
-	public Tache getTache() {
-		return tache;
+	public Collection<Tache> getTaches() {
+		return taches;
 	}
 
-	public void setTache(Tache tache) {
-		this.tache = tache;
+	public void setTaches(Collection<Tache> taches) {
+		this.taches = taches;
 	}
 
 	public Collaborateur getCollaborateurReferent() {
