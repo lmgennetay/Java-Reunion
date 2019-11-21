@@ -41,7 +41,7 @@ public class addRoleServlet extends HttpServlet {
 			role.setNom(nom);
 			
 			jpaRoleDao.addRole(role);
-			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/gestionCollaborateurs/listeRoles.jsp");
+			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/gestionCollaborateurs/listRoles.jsp");
         	rs.forward(request, response);
 		}
 		else

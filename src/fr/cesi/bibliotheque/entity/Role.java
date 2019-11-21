@@ -1,6 +1,7 @@
 package fr.cesi.bibliotheque.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,7 @@ public class Role implements Serializable {
 	private String nom ;
 	
 	@OneToMany
-	private Collaborateur collaborateur;
+	private Collection<Collaborateur> collaborateurs;
 
 	public Role() {
 	}
@@ -37,11 +38,11 @@ public class Role implements Serializable {
 		this.nom = nom;
 	}
 
-	public Collaborateur getCollaborateur() {
-		return collaborateur;
+	public Collection<Collaborateur> getCollaborateurs() {
+		return collaborateurs;
 	}
 
-	public void setCollaborateur(Collaborateur collaborateur) {
-		this.collaborateur = collaborateur;
+	public void setCollaborateurs(Collection<Collaborateur> collaborateurs) {
+		this.collaborateurs = collaborateurs;
 	}
 }

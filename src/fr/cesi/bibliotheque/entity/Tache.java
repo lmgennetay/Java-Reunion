@@ -1,5 +1,6 @@
 package fr.cesi.bibliotheque.entity;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ public class Tache {
 	private String description ;
 	
 	@ManyToMany(mappedBy="taches")
-	private Collaborateur collaborateur;
+	private Collection<Collaborateur> collaborateurs;
 
 	@OneToOne
 	private Reunion reunion;
@@ -47,19 +48,19 @@ public class Tache {
 		return id;
 	}
 
-	public Collaborateur getCollaborateur() {
-		return collaborateur;
-	}
-
-	public void setCollaborateur(Collaborateur collaborateur) {
-		this.collaborateur = collaborateur;
-	}
-
 	public Reunion getReunion() {
 		return reunion;
 	}
 
 	public void setReunion(Reunion reunion) {
 		this.reunion = reunion;
+	}
+
+	public Collection<Collaborateur> getCollaborateurs() {
+		return collaborateurs;
+	}
+
+	public void setCollaborateurs(Collection<Collaborateur> collaborateurs) {
+		this.collaborateurs = collaborateurs;
 	}
 }
