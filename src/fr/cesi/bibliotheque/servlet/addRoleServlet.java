@@ -40,7 +40,7 @@ public class addRoleServlet extends HttpServlet {
 			
 			role.setNom(nom);
 			
-			jpaRoleDao.addLivre(role);
+			jpaRoleDao.addRole(role);
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/gestionCollaborateurs/listeRoles.jsp");
         	rs.forward(request, response);
 		}
