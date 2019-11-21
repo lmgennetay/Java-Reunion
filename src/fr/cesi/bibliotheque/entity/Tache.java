@@ -3,12 +3,16 @@ package fr.cesi.bibliotheque.entity;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="tache")
 public class Tache {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -17,7 +21,7 @@ public class Tache {
 	private String nom ;
 	private String description ;
 	
-	@ManyToMany(mappedBy="taches")
+	@ManyToMany
 	private Collection<Collaborateur> collaborateurs;
 
 	@OneToOne

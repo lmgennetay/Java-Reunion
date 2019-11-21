@@ -1,16 +1,21 @@
 package fr.cesi.bibliotheque.entity;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="reunion")
 public class Reunion {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -21,7 +26,7 @@ public class Reunion {
 	private Date date_reunion ;
 	
 	@OneToMany
-	private Tache tache;
+	private Collection<Tache> taches;
 
 	// Référence
 	@OneToOne
