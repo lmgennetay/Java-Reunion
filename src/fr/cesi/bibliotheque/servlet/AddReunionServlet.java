@@ -3,6 +3,7 @@ package fr.cesi.bibliotheque.servlet;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -42,8 +43,30 @@ public class AddReunionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		//Recuperation de la liste des collaborateurs
+		JpaCollaborateurDao jpaCollaborateurDao  =  (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
+		Collection<Collaborateur> collaborateurs = jpaCollaborateurDao.getAllCollaborateurs();
+		System.out.println(collaborateurs);
+        
+        if ( collaborateurs != null  ) {
+	        request.setAttribute("collaborateurs", collaborateurs);   
+	        RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/listCollaborateur.jsp");
+			rs.forward(request, response);
+	    }
+		else {
+	    	RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/menuAdmin.jsp");
+	    	rs.forward(request, response);
+	    }
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		JpaReunionDao jpaReunionDao  =  (JpaReunionDao) DaoFactory.ReunionDF();
-		if ( request.getParameter("titre") != null ){
+		if ( request.getParameter("date_reunion") != null ){
 			//Conversion date_reunion
 			String date = request.getParameter("date_reunion");			
 			Date date_reunion = new SimpleDateFormat("dd/MM/yyyy").parse(date);
@@ -89,15 +112,6 @@ public class AddReunionServlet extends HttpServlet {
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/addReunion.jsp");
         	rs.forward(request, response);
 		}
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }
