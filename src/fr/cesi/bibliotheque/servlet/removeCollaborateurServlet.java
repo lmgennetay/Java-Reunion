@@ -20,7 +20,7 @@ import fr.cesi.bibliotheque.entity.Collaborateur;
  * Servlet implementation class RemoveCollaborateurServlet
  */
 @WebServlet("/removeCollaborateur")
-public class RemoveCollaborateurServlet extends HttpServlet {
+public class removeCollaborateurServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	/**
@@ -32,9 +32,10 @@ public class RemoveCollaborateurServlet extends HttpServlet {
 	}	
 	
     /**
+     * @return 
      * @see HttpServlet#HttpServlet()
      */
-    public RemoveCollaborateurServlet() {
+    public removeCollaborateurServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -73,8 +74,7 @@ public class RemoveCollaborateurServlet extends HttpServlet {
 		request.setAttribute("collaborateurs", collaborateurs);
         
 		if ( request.getParameter("id") != null ){
-			String ids = request.getParameter("id");
-			Long id = Long.parseLong(ids);
+			int id = Integer.parseInt(request.getParameter("id"));
 			jpaCollaborateurDao.removeCollaborateur(id);
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/MenuAdmin.jsp");
 			rs.forward(request, response);
