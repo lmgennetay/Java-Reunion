@@ -12,15 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.cesi.bibliotheque.dao.DaoFactory;
-import fr.cesi.bibliotheque.dao.jpa.JpaLivreDao;
-import fr.cesi.bibliotheque.entity.Livre;
+import fr.cesi.bibliotheque.dao.jpa.JpaTacheDao;
+import fr.cesi.bibliotheque.entity.Tache;
 
 
 /**
- * Servlet implementation class RemoveLivreServlet
+ * Servlet implementation class RemoveTacheServlet
  */
-@WebServlet("/removeLivre")
-public class RemoveLivreServlet extends HttpServlet {
+@WebServlet("/removeTache")
+public class RemoveTacheServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	/**
@@ -34,7 +34,7 @@ public class RemoveLivreServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RemoveLivreServlet() {
+    public RemoveTacheServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -67,21 +67,20 @@ public class RemoveLivreServlet extends HttpServlet {
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		super.service(request, response);
 		
-		JpaLivreDao jpaLivreDao  =  (JpaLivreDao) DaoFactory.LivreDF();
-		Collection<Livre> livres = jpaLivreDao.getAllLivres();
-		System.out.println(livres);
-		request.setAttribute("livres", livres);
+		JpaTacheDao jpaTacheDao  =  (JpaTacheDao) DaoFactory.TacheDF();
+		Collection<Tache> taches = jpaTacheDao.getAllTaches();
+		System.out.println(taches);
+		request.setAttribute("taches", taches);
         
 		if ( request.getParameter("id") != null ){
-			String ids = request.getParameter("id");
-			Long id = Long.parseLong(ids);
-			jpaLivreDao.removeLivre(id);
+			int id = Integer.parseInt(request.getParameter("id"));
+			jpaTacheDao.removeTache(id);
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/MenuAdmin.jsp");
 			rs.forward(request, response);
 		}
 		else
 		{
-			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/removeLivre.jsp");
+			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/removeTache.jsp");
 			rs.forward(request, response);
 		}        
 	}	
