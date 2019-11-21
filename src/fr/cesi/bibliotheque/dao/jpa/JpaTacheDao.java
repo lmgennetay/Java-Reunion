@@ -9,7 +9,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import fr.cesi.bibliotheque.entity.Role;
 import fr.cesi.bibliotheque.entity.Tache;
 
 /**
