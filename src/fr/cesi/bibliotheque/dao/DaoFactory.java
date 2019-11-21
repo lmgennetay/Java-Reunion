@@ -19,10 +19,10 @@ public class DaoFactory {
 	}
 	
 	public static JpaReunionDao ReunionDF() {
-		return new JpaCollaborateurDao( PersistenceManager.getEntityManagerFactory() );
+		return new JpaReunionDao( PersistenceManager.getEntityManagerFactory() );
 	}
 	
 	public static JpaTacheDao TacheDF() {
-		return new JpaCollaborateurDao( PersistenceManager.getEntityManagerFactory() );
+		return new JpaTacheDao( PersistenceManager.getEntityManagerFactory() );
 	}
 }
