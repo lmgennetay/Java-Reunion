@@ -20,7 +20,7 @@ public class JpaRoleDao {
 		this.emf = emf;
 	}
 	
-	public void addLivre(Role role) {
+	public void addRole(Role role) {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction t = em.getTransaction();
 		try {
@@ -33,7 +33,7 @@ public class JpaRoleDao {
 		}
 	}
 	
-	public void updateLivre(Role role) {
+	public void updateRole(Role role) {
 		int index = getRoleIndexById(role.getId());
 		if(index > -1) {
 			roles.set(index, role);
