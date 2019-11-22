@@ -44,20 +44,6 @@ public class AddReunionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		//Recuperation de la liste des collaborateurs
-		JpaCollaborateurDao jpaCollaborateurDao  =  (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
-		Collection<Collaborateur> collaborateurs = jpaCollaborateurDao.getAllCollaborateurs();
-		System.out.println(collaborateurs);
-        
-        if ( collaborateurs != null  ) {
-	        request.setAttribute("collaborateurs", collaborateurs);   
-	        RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/listCollaborateur.jsp");
-			rs.forward(request, response);
-	    }
-		else {
-	    	RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/menuAdmin.jsp");
-	    	rs.forward(request, response);
-	    }
 	}
 
 	/**
@@ -66,31 +52,23 @@ public class AddReunionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		JpaReunionDao jpaReunionDao  =  (JpaReunionDao) DaoFactory.ReunionDF();
+		JpaCollaborateurDao jpaCollaborateurDao  =  (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
+		Collection<Collaborateur> listeCollaborateurs = new ArrayList<Collaborateur>();
+		
 		if ( request.getParameter("date_reunion") != null ){
 			//Conversion date_reunion
 			String date = request.getParameter("date_reunion");			
 			Date date_reunion = new SimpleDateFormat("dd/MM/yyyy").parse(date);
 			
 			//Recuperation du referent
-			int id_referent = Integer.parseInt(request.getParameter("id_referent"));   
-			JpaCollaborateurDao jpaCollaborateurDao  =  (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
+			int id_referent = Integer.parseInt(request.getParameter("id_referent"));
 			Collaborateur referent = jpaCollaborateurDao.findCollaborateurById(id_referent);	
 			
 			//Recuperation liste collaborateurs	
-			ArrayList<Collaborateur> listeCollaborateurs = new ArrayList<Collaborateur>();
 			Collaborateur collaborateur = new Collaborateur();
 			for (int id_collaborateur : request.getParameter("listeCollaborateurs")) {
 				collaborateur = jpaCollaborateurDao.findCollaborateurById(id_collaborateur);
 				listeCollaborateurs.add(collaborateur);
-			}
-			
-			//Recuperation liste tâches
-			JpaTacheDao jpaTacheDao  =  (JpaTacheDao) DaoFactory.TacheDF();
-			ArrayList<Tache> listeTaches = new ArrayList<Tache>(); 
-			Tache tache = new Tache();
-			for (int id_tache : request.getParameter("listeTaches")) {
-				tache = jpaTacheDao.findTacheById(id_tache);
-				listeTaches.add(tache);
 			}
 			
 			//Creation du reunion
@@ -101,7 +79,7 @@ public class AddReunionServlet extends HttpServlet {
 			reunion.setDate_reunion(date_reunion);
 			reunion.setCollaborateurReferent(referent);
 			reunion.setCollaborateursParticipants(listeCollaborateurs);
-			reunion.setTaches(listeTaches);
+			//reunion.setTaches(listeTaches);
 			jpaReunionDao.addReunion(reunion);
 			
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/menuAdmin.jsp");
@@ -109,6 +87,9 @@ public class AddReunionServlet extends HttpServlet {
 		}
 		else
 		{
+			
+			listeCollaborateurs  =  jpaCollaborateurDao.getAllCollaborateurs();
+			request.setAttribute("listeCollaborateurs", listeCollaborateurs);
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/setReunion.jsp");
         	rs.forward(request, response);
 		}
