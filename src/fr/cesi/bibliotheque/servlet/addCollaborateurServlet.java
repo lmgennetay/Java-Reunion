@@ -46,7 +46,7 @@ public class addCollaborateurServlet extends HttpServlet {
 			Collaborateur collaborateur = new Collaborateur();
 			collaborateur.setNom(request.getParameter("nom"));
 			collaborateur.setPrenom(request.getParameter("prenom"));
-			collaborateur.setMail(request.getParameter("mail"));
+			collaborateur.setMail(request.getParameter("email"));
 			collaborateur.setRole(role);
 			
 			jpaCollaborateurDao.addCollaborateur(collaborateur);
