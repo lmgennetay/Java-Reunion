@@ -17,12 +17,12 @@
 	        <label>Nom </label><input type="text" name="nom"/>reunion.getNom()<br/>
 	        <label>Date Echeance </label><input type="date" name="date_echeance"/>reunion.getDate_echeance()<br/>
 	        <label>Description </label><input type="text" name="description"/>reunion.getDescription()<br>       	      	  	        
-	        <label>id</label><input name="nom" disabled/><%= reunion.getId() %><br/>
-	        <label>Objectif</label><input name="date_echeance" disabled/><%= reunion.getObjectif() %><br/>
+	        <label>id </label><input name="nom" disabled/><%= reunion.getId() %><br/>
+	        <label>Objectif </label><input name="date_echeance" disabled/><%= reunion.getObjectif() %><br/>
 	        <label>Date reunion</label><input name="date_reunion" disabled/><%= reunion.getDate_reunion() %><br>
 	        
 	        <select name="listeCollaborateurs" multiple> 
-	        	<% List<Collaborateur> listeCollaborateurs = reunion.getCollaborateursParticipants(); %>
+	        	<% Collection<Collaborateur> listeCollaborateurs = reunion.getCollaborateursParticipants(); %>
 				<% for(Collaborateur c : listeCollaborateurs) { %>
 					<option value="<%= c.getId() %>"> <%= c.getNom() + " " + c.getPrenom() %> </option>
 				<% } %> 

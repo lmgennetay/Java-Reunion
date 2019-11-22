@@ -2,7 +2,9 @@ package fr.cesi.bibliotheque.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,18 +43,22 @@ public class AddTacheServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		JpaTacheDao jpaTacheDao = (JpaTacheDao) DaoFactory.TacheDF();
 		JpaCollaborateurDao jpaCollaborateurDao  =  (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
+		JpaReunionDao jpaReunionDao  =  (JpaReunionDao) DaoFactory.ReunionDF();
+		
 		Collection<Collaborateur> listeCollaborateurs = new ArrayList<Collaborateur>();
 		if ( request.getParameter("reunion") != null ) {
 			//Recuperation de la reunion
-			int id_reunion = Integer.parseInt(request.getParameter("reunion"));   
-			JpaReunionDao jpaReunionDao  =  (JpaReunionDao) DaoFactory.ReunionDF();
+			int id_reunion = Integer.parseInt(request.getParameter("reunion"));  
 			Reunion reunion = jpaReunionDao.findReunionById(id_reunion);
 			
-			//Recuperation des collaborateurs
-			Collaborateur collaborateur = new Collaborateur();
-			for (int id_collaborateur : request.getParameter("listeCollaborateurs")) {
-				collaborateur = jpaCollaborateurDao.findCollaborateurById(id_collaborateur);
-				listeCollaborateurs.add(collaborateur);
+			//Recuperation des collaborateurs			
+			String[] outerArray = request.getParameterValues("listeCollaborateurs");
+			List<String> innerArray = Arrays.asList(outerArray);
+			System.out.println(innerArray);
+			for (String collab : innerArray) {
+				System.out.println("Collab " + collab);
+				Collaborateur c = jpaCollaborateurDao.findCollaborateurById(Integer.parseInt(collab));
+				listeCollaborateurs.add(c);
 			}
 			
 			//Creation de la tache
@@ -63,11 +69,13 @@ public class AddTacheServlet extends HttpServlet {
 			tache.setCollaborateurs(listeCollaborateurs);
 			jpaTacheDao.addTache(tache);
 
-			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/menuAdmin.jsp");
+			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/acceuil.jsp");
         	rs.forward(request, response);
 		} else {
 			listeCollaborateurs  =  jpaCollaborateurDao.getAllCollaborateurs();
 			request.setAttribute("listeCollaborateurs", listeCollaborateurs);
+			Reunion reunion = jpaReunionDao.findReunionById(Integer.parseInt(request.getParameter("id_reunion")));
+			request.setAttribute("reunion", reunion);
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/addTache.jsp");
         	rs.forward(request, response);
 		}	
