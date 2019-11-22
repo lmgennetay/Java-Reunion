@@ -3,7 +3,6 @@ package fr.cesi.bibliotheque.servlet;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -24,16 +23,16 @@ import fr.cesi.bibliotheque.entity.Role;
 import fr.cesi.bibliotheque.entity.Tache;
 
 /**
- * Servlet implementation class setReunion
+ * Servlet implementation class updateReunionServlet
  */
-@WebServlet("/setReunion")
-public class AddReunionServlet extends HttpServlet {
+@WebServlet("/updateReunionServlet")
+public class UpdateReunionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddReunionServlet() {
+    public UpdateReunionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,38 +41,18 @@ public class AddReunionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		//Recuperation de la liste des collaborateurs
-		JpaCollaborateurDao jpaCollaborateurDao  =  (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
-		Collection<Collaborateur> collaborateurs = jpaCollaborateurDao.getAllCollaborateurs();
-		System.out.println(collaborateurs);
-        
-        if ( collaborateurs != null  ) {
-	        request.setAttribute("collaborateurs", collaborateurs);   
-	        RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/listCollaborateur.jsp");
-			rs.forward(request, response);
-	    }
-		else {
-	    	RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/menuAdmin.jsp");
-	    	rs.forward(request, response);
-	    }
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		JpaReunionDao jpaReunionDao  =  (JpaReunionDao) DaoFactory.ReunionDF();
-		if ( request.getParameter("date_reunion") != null ){
+		if (request.getParameter("id") != null) {
+			//DAO
+			JpaReunionDao jpaReunionDao  =  (JpaReunionDao) DaoFactory.ReunionDF();
+			JpaCollaborateurDao jpaCollaborateurDao  =  (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
+			JpaTacheDao jpaTacheDao  =  (JpaTacheDao) DaoFactory.TacheDF();
+			
 			//Conversion date_reunion
 			String date = request.getParameter("date_reunion");			
 			Date date_reunion = new SimpleDateFormat("dd/MM/yyyy").parse(date);
 			
 			//Recuperation du referent
 			int id_referent = Integer.parseInt(request.getParameter("id_referent"));   
-			JpaCollaborateurDao jpaCollaborateurDao  =  (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
 			Collaborateur referent = jpaCollaborateurDao.findCollaborateurById(id_referent);	
 			
 			//Recuperation liste collaborateurs	
@@ -85,7 +64,6 @@ public class AddReunionServlet extends HttpServlet {
 			}
 			
 			//Recuperation liste tâches
-			JpaTacheDao jpaTacheDao  =  (JpaTacheDao) DaoFactory.TacheDF();
 			ArrayList<Tache> listeTaches = new ArrayList<Tache>(); 
 			Tache tache = new Tache();
 			for (int id_tache : request.getParameter("listeTaches")) {
@@ -102,16 +80,22 @@ public class AddReunionServlet extends HttpServlet {
 			reunion.setCollaborateurReferent(referent);
 			reunion.setCollaborateursParticipants(listeCollaborateurs);
 			reunion.setTaches(listeTaches);
-			jpaReunionDao.addReunion(reunion);
+			jpaReunionDao.updateReunion(reunion);
 			
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/menuAdmin.jsp");
         	rs.forward(request, response);
+		} else {
+			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/selectReunion.jsp");
+			rs.forward(request, response);
 		}
-		else
-		{
-			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/setReunion.jsp");
-        	rs.forward(request, response);
-		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

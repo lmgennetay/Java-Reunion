@@ -1,6 +1,7 @@
 package fr.cesi.bibliotheque.servlet;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,7 +37,7 @@ public class addCollaborateurServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		JpaCollaborateurDao jpaCollaborateurDao = (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
-		if ( request.getParameter("titre") != null ) {
+		if ( request.getParameter("nom") != null && request.getParameter("prenom") != null ) {
 			//Recuperation du role
 			int id_role = Integer.parseInt(request.getParameter("role"));   
 			JpaRoleDao jpaRoleDao  =  (JpaRoleDao) DaoFactory.RoleDF();
@@ -49,9 +50,12 @@ public class addCollaborateurServlet extends HttpServlet {
 			collaborateur.setRole(role);
 			
 			jpaCollaborateurDao.addCollaborateur(collaborateur);
-			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/menuAdmin.jsp");
+			RequestDispatcher rs = request.getRequestDispatcher("/listCollaborateurServlet");
         	rs.forward(request, response);
 		} else {
+			JpaRoleDao jpaRoleDao  =  (JpaRoleDao) DaoFactory.RoleDF();
+			Collection<Role> roles = jpaRoleDao.getAllRoles();	
+			request.setAttribute("roles", roles); 
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/addCollaborateur.jsp");
         	rs.forward(request, response);
 		}

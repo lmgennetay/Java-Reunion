@@ -26,7 +26,7 @@
 					<th scope="row"><%= collab.getId() %></th>
 					<td><%= collab.getNom() %></td>
 					<td><%= collab.getPrenom() %></td>
-					<td><%= collab.getRole() %></td>
+					<td><%= collab.getRole().getNom() %></td>
 					<td><i class="fa fa-eyes"></i></td>
 				</tr>
 			<% } %>

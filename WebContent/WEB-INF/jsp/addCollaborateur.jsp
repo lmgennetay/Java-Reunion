@@ -9,7 +9,7 @@
 <div class="col-lg-offset-4 col-lg-4" >
 	<legend class="text-center">AJOUTER UN COLLABORATEUR</legend>
 	<fieldset>
-		<form method="post" action=addCollaborateur>
+		<form method="post" action=addCollaborateurServlet>
 		  <div class="form-group">
 		    <label for="nom">Nom</label>
 		    <input type="text" class="form-control" name="nom" id="nom" placeholder="Nom">
@@ -22,18 +22,15 @@
 		    <label for="email">Email</label>
 		    <input type="email" class="form-control" name="email" id="email" placeholder="Email">
 		  </div>
-		   <div class="form-group">
+		  <div class="form-group">
 		    <label for="role">Rôle</label>
-		    <input type="role" class="form-control" name="role" id="role" placeholder="Role">
-		  </div>
-		  
-		  <label>Rôle :</label> 
-          <select name="role">
-            <% Collection<Role> roles = (Collection<Role>) request.getAttribute("roles"); %>
-			<% for(Role r : roles) { %>
-				<option value="<%= r.getId() %>"> <%= r.getNom() %> </option>
-			<% } %> 
-          </select>
+	          <select name="role"  class="browser-default custom-select">
+	            <% Collection<Role> roles = (Collection<Role>) request.getAttribute("roles"); %>
+				<% for(Role r : roles) { %>
+					<option value="<%= r.getId() %>"> <%= r.getNom() %> </option>
+				<% } %> 
+	          </select>
+          </div>
   
 		  <div class="row">
 			<div class="col-lg-2" >
