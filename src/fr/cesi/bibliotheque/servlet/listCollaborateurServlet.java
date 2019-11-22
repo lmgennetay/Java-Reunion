@@ -38,7 +38,7 @@ public class listCollaborateurServlet extends HttpServlet {
 		System.out.println(collaborateurs);
         
         if ( collaborateurs != null  ) {
-	        request.setAttribute("collaborateurs", collaborateurs);   
+	        request.setAttribute("collaborateurs", collaborateurs);
 	        RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/listeCollaborateurs.jsp");
 			rs.forward(request, response);
 	    }

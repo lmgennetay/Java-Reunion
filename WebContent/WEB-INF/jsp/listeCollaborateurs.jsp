@@ -10,11 +10,12 @@
 	<legend class="text-center">LISTE DES COLLABORATEURS</legend>
 	<fieldset>
 		<table class="table">
-			<thead >
-				<tr >
+			<thead>
+				<tr>
 					<th scope="col" >Id</th>
 					<th scope="col" >Nom</th>
 					<th scope="col" >Prénom</th>
+					<th scope="col" >Mail</th>
 					<th scope="col" >Rôle</th>
 					<th scope="col" ></th>
 				</tr>
@@ -26,6 +27,7 @@
 					<th scope="row"><%= collab.getId() %></th>
 					<td><%= collab.getNom() %></td>
 					<td><%= collab.getPrenom() %></td>
+					<td><%= collab.getMail() %></td>
 					<td><%= collab.getRole().getNom() %></td>
 					<td><i class="fa fa-eyes"></i></td>
 				</tr>
