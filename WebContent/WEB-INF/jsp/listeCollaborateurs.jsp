@@ -6,7 +6,7 @@
 <%@ page import="java.util.Collection" %>
 <%@ include file="../template/header.jsp" %> 
 <br>
-<div class="col-lg-offset-4 col-lg-4" >
+<div class="col-lg-offset-3 col-lg-6" >
 	<legend class="text-center">LISTE DES COLLABORATEURS</legend>
 	<fieldset>
 		<table class="table">
@@ -14,9 +14,9 @@
 				<tr>
 					<th scope="col" >Id</th>
 					<th scope="col" >Nom</th>
-					<th scope="col" >Prï¿½nom</th>
+					<th scope="col" >Prénom</th>
 					<th scope="col" >Mail</th>
-					<th scope="col" >Rï¿½le</th>
+					<th scope="col" >Rôle</th>
 					<th scope="col" ></th>
 				</tr>
 			</thead>
