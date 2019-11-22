@@ -55,13 +55,13 @@ public class updateTacheServlet extends HttpServlet {
 			tache.setDescription(description);
 	
 			jpaTacheDao.updateTache(tache);
-			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/menuAdmin.jsp");
+			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/acceuil.jsp");
 	    	rs.forward(request, response);
 		} else {
 			int idParam = Integer.parseInt(request.getParameter("id"));
 			JpaTacheDao jpaTacheDao  =  (JpaTacheDao) DaoFactory.TacheDF();
 			Tache tache = jpaTacheDao.findTacheById(idParam);
-			request.setAttribute("Tache", tache);
+			request.setAttribute("tache", tache);
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/addTache.jsp");
 			rs.forward(request, response);
 		}

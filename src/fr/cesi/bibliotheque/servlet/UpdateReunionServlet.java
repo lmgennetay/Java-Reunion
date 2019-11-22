@@ -66,10 +66,12 @@ public class UpdateReunionServlet extends HttpServlet {
 			//Recuperation liste tâches
 			ArrayList<Tache> listeTaches = new ArrayList<Tache>(); 
 			Tache tache = new Tache();
-			for (int id_tache : request.getParameter("listeTaches")) {
+			for (int id_tache : request.getParameterValues("listeTaches")) {
 				tache = jpaTacheDao.findTacheById(id_tache);
 				listeTaches.add(tache);
 			}
+			
+			
 			
 			//Creation du reunion
 			Reunion reunion = new Reunion();
