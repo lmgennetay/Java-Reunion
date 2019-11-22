@@ -29,7 +29,10 @@
 					<td><%= collab.getPrenom() %></td>
 					<td><%= collab.getMail() %></td>
 					<td><%= collab.getRole().getNom() %></td>
-					<td><i class="fa fa-eyes"></i></td>
+					<td>
+						<button type="button" class="btn btn-primary text-center" onclick="location.href = '/Bibliotheque/ShowCollaborateurServlet?id=<%= collab.getId() %>'">Show</button>
+						<button type="button" class="btn btn-primary text-center" onclick="location.href = '/Bibliotheque/EditCollaborateurServlet?id=<%= collab.getId() %>'">Edit</button>
+					</td>
 				</tr>
 			<% } %>
 			</tbody>
@@ -40,7 +43,7 @@
 				<button type="button" class="btn btn-primary col-lg-12 text-center" onclick="history.back()"><i class="fa fa-angle-left"></i></button>
 			</div>
 			<div class="col-lg-10" >
-				<button type="button" class="btn btn-primary col-lg-12 text-center" onclick="location.href = '/Bibliotheque/listCollaborateur'">Ajouter un collaborateur</button>
+				<button type="button" class="btn btn-primary col-lg-12 text-center" onclick="location.href = '/Bibliotheque/addCollaborateurServlet'">Ajouter un collaborateur</button>
 			</div>
 		</div>
 	</fieldset>
