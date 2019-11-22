@@ -38,7 +38,7 @@
 				<button type="button" class="btn btn-primary col-lg-12 text-center" onclick="history.back()"><i class="fa fa-angle-left"></i></button>
 			</div>
 			<div class="col-lg-10" >
-				<button type="button" class="btn btn-primary col-lg-12 text-center" onclick="location.href = '/Bibliotheque/listCollaborateur'">Ajouter un collaborateur</button>
+				<button type="button" class="btn btn-primary col-lg-12 text-center" onclick="location.href = '/Bibliotheque/addCollaborateurServlet'">Ajouter</button>
 			</div>
 		</div>
 	</fieldset>
