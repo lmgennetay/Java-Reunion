@@ -10,19 +10,22 @@
 <div class="col-lg-offset-4 col-lg-4" >
 	<% Reunion reunion = (Reunion) request.getAttribute("reunion"); %>
 	<legend> Information de la réunion n°<%= reunion.getId() %> </legend>
-	        Objectif :<%= reunion.getObjectif() %><br/>
-	        Date de la réunion :<%= reunion.getDate_reunion() %><br/>
-	        Référent :<%= reunion.getCollaborateurReferent().getNom() %> <%= reunion.getCollaborateurReferent().getPrenom() %><br/>
-	        Compte rendu de la réunion :<%= reunion.getCompterendu() %><br>
-	        <br>
-	        Liste des participants :
+	        <b>Objectif :</b> <%= reunion.getObjectif() %><br/>
+	        <b>Date de la réunion :</b> <%= reunion.getDate_reunion() %><br/>
+	        <b>Référent :</b> <%= reunion.getCollaborateurReferent().getNom() %> <%= reunion.getCollaborateurReferent().getPrenom() %><br/>
+	        <br/>
+	        
+	        <b>Compte rendu de la réunion :</b><br/><%= reunion.getCompterendu() %><br>
+	        <br/>
+	        <br/>
+	        <h4 style="text-align:center;">Liste des participants</h4>
 			<table class="table">
 				<thead >
 					<tr >
 						<th scope="col" >Nom</th>
 						<th scope="col" >Prénom</th>
 						<th scope="col" >Rôle</th>
-						<th scope="col" >Voir</th>
+						<th scope="col" >Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -32,7 +35,7 @@
 						<td><%= collab.getNom() %></td>
 						<td><%= collab.getPrenom() %></td>
 						<td><%= collab.getRole().getNom() %></td>
-						<td><button type="button" class="btn btn-primary" onclick="location.href = '/Bibliotheque/ShowCollaborateurServlet?id=<%= collab.getId() %>'">Show</button></td>
+						<td><button type="button" class="btn btn-sm btn-info" onclick="location.href = '/Bibliotheque/ShowCollaborateurServlet?id=<%= collab.getId() %>'">Voir</button></td>
 					</tr>
 				<% } %>
 				</tbody>
