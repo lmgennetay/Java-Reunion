@@ -46,7 +46,7 @@ public class ShowReunionServlet extends HttpServlet {
 		
 		else {
 			System.out.println("out");
-			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/selectReunion.jsp");
+			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/listeReunions.jsp");
 			rs.forward(request, response);
 	    }   
 	}
