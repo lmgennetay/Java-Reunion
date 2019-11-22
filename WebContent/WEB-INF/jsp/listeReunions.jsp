@@ -28,8 +28,8 @@
 					<td><%= reunion.getDate_reunion() %></td>
 					<td><%= reunion.getLieu() %></td>
 					<td><%= reunion.getObjectif() %></td>
-					<td><%= reunion.getCollaborateurReferent().getPrenom() %> <%= reunion.getCollaborateurReferent().getNom() %></td>
-					<td><i class="fa fa-eyes"></i></td>
+					<td><%= reunion.getCollaborateurReferent().getNom() %> <%= reunion.getCollaborateurReferent().getPrenom() %></td>
+					<td><button type="button" class="btn btn-primary text-center" onclick="location.href = '/Bibliotheque/showReunion?id=<%= reunion.getId() %>'">Show</button></td>
 				</tr>
 			<% } %>
 			</tbody>
@@ -37,7 +37,7 @@
 		<br><br>
 		<div class="row">
 			<div class="col-lg-2" >
-				<button type="button" class="btn btn-primary col-lg-12 text-center" onclick="history.back()"><i class="fa fa-angle-left"></i></button>
+				<button type="button" class="btn btn-primary col-lg-12 text-center" onclick="location.href = '/Bibliotheque/'"><i class="fa fa-angle-left"></i></button>
 			</div>
 			<div class="col-lg-10" >
 				<button type="button" class="btn btn-primary col-lg-12 text-center" onclick="location.href = '/Bibliotheque/setReunion'">Ajouter une réunion</button>
