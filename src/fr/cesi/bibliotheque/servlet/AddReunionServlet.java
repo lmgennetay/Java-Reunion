@@ -117,7 +117,7 @@ public class AddReunionServlet extends HttpServlet {
 			//reunion.setTaches(listeTaches);
 			jpaReunionDao.addReunion(reunion);
 			
-			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/menuAdmin.jsp");
+			RequestDispatcher rs = request.getRequestDispatcher("/listeReunions");
         	rs.forward(request, response);
 		}
 		else
