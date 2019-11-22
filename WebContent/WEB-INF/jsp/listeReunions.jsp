@@ -40,7 +40,7 @@
 				<button type="button" class="btn btn-primary col-lg-12 text-center" onclick="location.href = '/Bibliotheque/'"><i class="fa fa-angle-left"></i></button>
 			</div>
 			<div class="col-lg-10" >
-				<button type="button" class="btn btn-primary col-lg-12 text-center" onclick="location.href = '/Bibliotheque/addReunion'">Ajouter une réunion</button>
+				<button type="button" class="btn btn-primary col-lg-12 text-center" onclick="location.href = '/Bibliotheque/setReunion'">Ajouter une réunion</button>
 			</div>
 		</div>
 	</fieldset>
