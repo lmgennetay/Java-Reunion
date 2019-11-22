@@ -40,7 +40,7 @@ public class updateCollaborateurServlet extends HttpServlet {
 			String prenom = request.getParameter("prenom");
 			String mail = request.getParameter("mail");
 			//Recuperation du role
-			int id_role = Integer.parseInt(request.getParameter("role"));   
+			int id_role = Integer.parseInt(request.getParameter("role"));
 			JpaRoleDao jpaRoleDao  =  (JpaRoleDao) DaoFactory.RoleDF();
 			Role role = jpaRoleDao.findRoleById(id_role);
 			//Traitement de la mise à jour

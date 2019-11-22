@@ -10,12 +10,13 @@
 	<legend class="text-center">LISTE DES COLLABORATEURS</legend>
 	<fieldset>
 		<table class="table">
-			<thead >
-				<tr >
+			<thead>
+				<tr>
 					<th scope="col" >Id</th>
 					<th scope="col" >Nom</th>
-					<th scope="col" >Prénom</th>
-					<th scope="col" >Rôle</th>
+					<th scope="col" >Prï¿½nom</th>
+					<th scope="col" >Mail</th>
+					<th scope="col" >Rï¿½le</th>
 					<th scope="col" ></th>
 				</tr>
 			</thead>
@@ -26,8 +27,12 @@
 					<th scope="row"><%= collab.getId() %></th>
 					<td><%= collab.getNom() %></td>
 					<td><%= collab.getPrenom() %></td>
+					<td><%= collab.getMail() %></td>
 					<td><%= collab.getRole().getNom() %></td>
-					<td><i class="fa fa-eyes"></i></td>
+					<td>
+						<button type="button" class="btn btn-primary text-center" onclick="location.href = '/Bibliotheque/ShowCollaborateurServlet?id=<%= collab.getId() %>'">Show</button>
+						<button type="button" class="btn btn-primary text-center" onclick="location.href = '/Bibliotheque/EditCollaborateurServlet?id=<%= collab.getId() %>'">Edit</button>
+					</td>
 				</tr>
 			<% } %>
 			</tbody>
