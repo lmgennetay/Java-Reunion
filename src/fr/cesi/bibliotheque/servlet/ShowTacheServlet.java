@@ -26,18 +26,16 @@ public class ShowTacheServlet extends HttpServlet {
      */
     public ShowTacheServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		if ( request.getParameter("id") != null  ) {
 			int id = Integer.parseInt(request.getParameter("id"));
 			JpaTacheDao jpaTacheDao  =  (JpaTacheDao) DaoFactory.TacheDF();
-			Tache tache = jpaTacheDao.findTacheById(id) ;
+			Tache tache = jpaTacheDao.findTacheById(id);
 			System.out.println(tache.getId());
 			request.setAttribute("tache", tache);
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/showTache.jsp");
@@ -55,7 +53,6 @@ public class ShowTacheServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
     }	
 }

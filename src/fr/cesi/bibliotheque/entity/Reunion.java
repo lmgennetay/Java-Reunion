@@ -15,6 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name="reunion")
 public class Reunion {
@@ -26,8 +29,9 @@ public class Reunion {
 	private String compterendu ;
 	private Date date_reunion ;
 	
-	@OneToMany
-	private Collection<Tache> taches;
+	@OneToMany(fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
+	private Collection<Tache> taches = new LinkedHashSet<Tache>();
 
 	// Référence
 	@OneToOne
