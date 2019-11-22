@@ -6,7 +6,7 @@
 	
 	<div class="row">
 		<div class="col-lg-offset-3 col-lg-6" >
-			<button  type="button" class="btn btn-primary col-lg-12 text-center" onclick="location.href = '/Bibliotheque/listReunions'">Gestion des réunions</button>
+			<button  type="button" class="btn btn-primary col-lg-12 text-center" onclick="location.href = '/Bibliotheque/listeReunions'">Gestion des réunions</button>
 		</div>
 	</div>
 	<br>

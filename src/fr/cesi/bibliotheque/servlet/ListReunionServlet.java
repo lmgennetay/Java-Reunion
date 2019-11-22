@@ -19,7 +19,7 @@ import fr.cesi.bibliotheque.entity.Reunion;
 /**
  * Servlet implementation class listReunionServlet
  */
-@WebServlet("/listReunion")
+@WebServlet("/listeReunions")
 public class ListReunionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -56,7 +56,7 @@ public class ListReunionServlet extends HttpServlet {
         
         if ( reunions != null  ) {
 	        request.setAttribute("reunions", reunions);   
-	        RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/listReunion.jsp");
+	        RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/listeReunions.jsp");
 			rs.forward(request, response);
 	    }
 		else {
