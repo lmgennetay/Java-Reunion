@@ -4,13 +4,19 @@
 <%@ page import="fr.cesi.bibliotheque.entity.Tache" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Collection" %>
+<%@ page import="java.util.Date" %>
 <%@ include file="../template/header.jsp" %> 
 <br>
 <div class="col-lg-offset-4 col-lg-4" >
 	<% Tache tache = (Tache) request.getAttribute("tache"); %>
 	<legend> Information de la tache n°<%= tache.getId() %> </legend>
 	        <b>Nom :</b> <%= tache.getNom() %><br/>
-	        <b>Date échéance :</b> <%= tache.getDate_echeance() %><br/>
+	        <b>Date échéance :</b> <%= tache.getDate_echeance() %>
+	       	<% Date now = new Date();
+	       	if(tache.getDate_echeance().before(now)){ %>
+	       	<div style="font-size:xx-small">L'échéance de cette date à été dépassée !</div>
+	       	<% } %>
+	        <br/>
 	        <b>Tache concernant la réunion :</b> <%= tache.getReunion().getObjectif() %><br/>
 	        <br/>
 	        <b>Description de la tache :</b><br/><%= tache.getDescription() %><br>
