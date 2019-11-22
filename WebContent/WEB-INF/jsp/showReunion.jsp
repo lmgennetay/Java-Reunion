@@ -65,6 +65,9 @@
 				<% } %>
 				</tbody>
 			</table>
+			<div class="col-lg-12" >
+				<button type="button" class="btn btn-primary btn-sm col-lg-12 text-center" onclick="location.href = '/Bibliotheque/addTache?reunion=<%= reunion.getId() %>'">Ajouter une tache</button>
+			</div>
 	        <br/>
 	        <br/>
 		<div class="row">

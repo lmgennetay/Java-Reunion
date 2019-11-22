@@ -44,12 +44,13 @@ public class AddTacheServlet extends HttpServlet {
 		JpaTacheDao jpaTacheDao = (JpaTacheDao) DaoFactory.TacheDF();
 		JpaCollaborateurDao jpaCollaborateurDao  =  (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
 		JpaReunionDao jpaReunionDao  =  (JpaReunionDao) DaoFactory.ReunionDF();
-		
+
 		Collection<Collaborateur> listeCollaborateurs = new ArrayList<Collaborateur>();
-		if ( request.getParameter("reunion") != null ) {
+		if ( request.getParameter("reunion") != null && request.getParameter("add") != null) {
+			
 			//Recuperation de la reunion
 			int id_reunion = Integer.parseInt(request.getParameter("reunion"));  
-			Reunion reunion = jpaReunionDao.findReunionById(id_reunion);
+			Reunion reunion = jpaReunionDao.findReunionById(id_reunion);	
 			
 			//Recuperation des collaborateurs			
 			String[] outerArray = request.getParameterValues("listeCollaborateurs");
@@ -60,7 +61,6 @@ public class AddTacheServlet extends HttpServlet {
 				Collaborateur c = jpaCollaborateurDao.findCollaborateurById(Integer.parseInt(collab));
 				listeCollaborateurs.add(c);
 			}
-			
 			//Creation de la tache
 			Tache tache = new Tache();
 			tache.setNom(request.getParameter("nom"));
@@ -68,13 +68,12 @@ public class AddTacheServlet extends HttpServlet {
 			tache.setReunion(reunion);	
 			tache.setCollaborateurs(listeCollaborateurs);
 			jpaTacheDao.addTache(tache);
-
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/acceuil.jsp");
         	rs.forward(request, response);
 		} else {
 			listeCollaborateurs  =  jpaCollaborateurDao.getAllCollaborateurs();
 			request.setAttribute("listeCollaborateurs", listeCollaborateurs);
-			Reunion reunion = jpaReunionDao.findReunionById(Integer.parseInt(request.getParameter("id_reunion")));
+			Reunion reunion = jpaReunionDao.findReunionById(Integer.parseInt(request.getParameter("reunion")));
 			request.setAttribute("reunion", reunion);
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/addTache.jsp");
         	rs.forward(request, response);

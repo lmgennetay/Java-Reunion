@@ -60,7 +60,7 @@ public class JpaReunionDao {
 	 * @return reunion : La réunion recherchée
 	 */
 	public Reunion findReunionById(int id) {
-		EntityManager em = emf.createEntityManager();		
+		EntityManager em = emf.createEntityManager();
 		Reunion reunion = em.find(Reunion.class, id);
 		em.close();
 		return reunion;

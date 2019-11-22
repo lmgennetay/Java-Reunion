@@ -12,18 +12,18 @@
 <div style="width: 400px; margin: 0 auto">
 	<legend> Ajouter une Tache </legend>
 	<fieldset>
-	   	<form method="post" action=addTacheServlet>
+	   	<form method="post" action=addTache?reunion=1&add=1>
 	        <label>Nom </label><input type="text" name="nom"/><br/>
 	        <label>Date Echeance </label><input type="date" name="date_echeance"/><br/>
 	        <label>Description </label><input type="text" name="description"/><br>
 	        	      	  	        
 	        <% Reunion reunion = (Reunion) request.getAttribute("reunion"); %>
-	        <label>id</label><input name="nom" disabled/><%= reunion.getId() %><br/>
-	        <label>Objectif</label><input name="date_echeance" disabled/><%= reunion.getObjectif() %><br/>
-	        <label>Date reunion</label><input name="date_reunion" disabled/><%= reunion.getDate_reunion() %><br>
+	        <label>id</label><input name="reunion" value="<%= reunion.getId() %>" disabled/><br/>
+	        <label>Objectif</label><input name="objectif" value="<%= reunion.getObjectif() %>" disabled/><br/>
+	        <label>Date reunion</label><input name="date_reunion" value="<%= reunion.getDate_reunion() %>" disabled/><br>
 	        
 	        <select name="listeCollaborateurs" multiple> 
-	        	<% List<Collaborateur> listeCollaborateurs = reunion.getCollaborateursParticipants(); %>
+	        	<% Collection<Collaborateur> listeCollaborateurs = reunion.getCollaborateursParticipants(); %>
 				<% for(Collaborateur c : listeCollaborateurs) { %>
 					<option value="<%= c.getId() %>"> <%= c.getNom() + " " + c.getPrenom() %> </option>
 				<% } %> 
