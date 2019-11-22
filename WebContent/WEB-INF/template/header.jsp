@@ -18,4 +18,4 @@
 
 </head>
 
-<body>
+<body style="background-color:#FDF7D5">
