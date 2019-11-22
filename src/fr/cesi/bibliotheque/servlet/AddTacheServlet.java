@@ -65,7 +65,7 @@ public class AddTacheServlet extends HttpServlet {
 			Tache tache = new Tache();
 			tache.setNom(request.getParameter("nom"));
 			tache.setDescription(request.getParameter("prenom"));
-			tache.setReunion(reunion);	
+			tache.setReunion(reunion);
 			tache.setCollaborateurs(listeCollaborateurs);
 			jpaTacheDao.addTache(tache);
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/acceuil.jsp");
