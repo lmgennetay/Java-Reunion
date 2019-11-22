@@ -1,13 +1,22 @@
 <%@ include file="WEB-INF/template/header.jsp" %>
-<div style="width: 200px; margin: 0 auto  ">
-<legend>Connexion à CESI - BIBLIOBOX </legend>
+<br>
+<div class="col-lg-offset-4 col-lg-4" >
+	<legend class="text-center">Gestionnaire de réunions</legend>
 	<fieldset>
-		<form method="post" action=login>
-			<label>Identifiant </label><input name="identifiant"/><br/><br/>
-	        <label>Mot de passe </label><input name="password"/><br/>
-	        <br>
-	        <button style="float: right" type="submit">Connexion</button>	
-        </form>       
+	
+	<div class="row">
+		<div class="col-lg-offset-3 col-lg-6" >
+			<button  type="button" class="btn btn-primary col-lg-12 text-center" onclick="location.href = '/Bibliotheque/listReunions'">Gestion des réunions</button>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-lg-offset-3 col-lg-6" >
+			<button type="button" class="btn btn-primary col-lg-12 text-center" onclick="location.href = '/Bibliotheque/listCollaborateurServlet'">Gestion des collaborateurs</button>
+		</div>
+	</div>
+
 	</fieldset>
-</div> 
+</div>
+
 <%@ include file="WEB-INF/template/footer.jsp" %>
