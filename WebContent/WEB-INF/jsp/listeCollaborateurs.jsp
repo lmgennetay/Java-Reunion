@@ -31,7 +31,6 @@
 					<td><%= collab.getRole().getNom() %></td>
 					<td>
 						<button type="button" class="btn btn-primary text-center" onclick="location.href = '/Bibliotheque/ShowCollaborateurServlet?id=<%= collab.getId() %>'">Show</button>
-						<button type="button" class="btn btn-primary text-center" onclick="location.href = '/Bibliotheque/EditCollaborateurServlet?id=<%= collab.getId() %>'">Edit</button>
 					</td>
 				</tr>
 			<% } %>

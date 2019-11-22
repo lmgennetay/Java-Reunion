@@ -34,28 +34,32 @@ public class updateCollaborateurServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getParameter("nom") != null && request.getParameter("prenom") != null) {
+		if (request.getParameter("id") != null ) {
+			System.out.println("true");
 			int idParam = Integer.parseInt(request.getParameter("id"));
 			String nom = request.getParameter("nom");
 			String prenom = request.getParameter("prenom");
-			String mail = request.getParameter("mail");
+			String email = request.getParameter("email");
 			//Recuperation du role
 			int id_role = Integer.parseInt(request.getParameter("role"));
+			
 			JpaRoleDao jpaRoleDao  =  (JpaRoleDao) DaoFactory.RoleDF();
 			Role role = jpaRoleDao.findRoleById(id_role);
 			//Traitement de la mise à jour
 			JpaCollaborateurDao jpaCollaborateurDao  =  (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
 			Collaborateur collaborateur = jpaCollaborateurDao.findCollaborateurById(idParam);
-			System.out.println(collaborateur.getId());
+			
 			collaborateur.setNom(nom);
 			collaborateur.setPrenom(prenom);
-			collaborateur.setMail(mail);
+			collaborateur.setMail(email);
 			collaborateur.setRole(role);
-
+			System.out.println("mon role est "+collaborateur.getNom());
 			jpaCollaborateurDao.updateCollaborateur(collaborateur);
-			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/menuAdmin.jsp");
+			
+			RequestDispatcher rs = request.getRequestDispatcher("/listCollaborateurServlet");
         	rs.forward(request, response);
 		} else {
+			System.out.println("else");
 			int idParam = Integer.parseInt(request.getParameter("id"));
 			JpaCollaborateurDao jpaCollaborateurDao  =  (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
 			Collaborateur collaborateur = jpaCollaborateurDao.findCollaborateurById(idParam);

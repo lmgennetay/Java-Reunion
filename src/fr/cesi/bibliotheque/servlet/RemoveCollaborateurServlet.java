@@ -19,7 +19,7 @@ import fr.cesi.bibliotheque.entity.Collaborateur;
 /**
  * Servlet implementation class RemoveCollaborateurServlet
  */
-@WebServlet("/removeCollaborateur")
+@WebServlet("/removeCollaborateurServlet")
 public class RemoveCollaborateurServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
@@ -76,12 +76,12 @@ public class RemoveCollaborateurServlet extends HttpServlet {
 		if ( request.getParameter("id") != null ){
 			int id = Integer.parseInt(request.getParameter("id"));
 			jpaCollaborateurDao.removeCollaborateur(id);
-			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/MenuAdmin.jsp");
+			RequestDispatcher rs = request.getRequestDispatcher("/listCollaborateurServlet");
 			rs.forward(request, response);
 		}
 		else
 		{
-			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/removeCollaborateur.jsp");
+			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/listCollaborateur.jsp");
 			rs.forward(request, response);
 		}        
 	}	

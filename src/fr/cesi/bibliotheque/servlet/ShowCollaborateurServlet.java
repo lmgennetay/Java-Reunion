@@ -1,6 +1,7 @@
 package fr.cesi.bibliotheque.servlet;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.cesi.bibliotheque.dao.DaoFactory;
 import fr.cesi.bibliotheque.dao.jpa.JpaCollaborateurDao;
+import fr.cesi.bibliotheque.dao.jpa.JpaRoleDao;
 import fr.cesi.bibliotheque.entity.Collaborateur;
+import fr.cesi.bibliotheque.entity.Role;
 
 /**
  * Servlet implementation class ShowCollaborateurServlet
@@ -35,11 +38,17 @@ public class ShowCollaborateurServlet extends HttpServlet {
 			int idParam = Integer.parseInt(request.getParameter("id"));
 			JpaCollaborateurDao jpaCollaborateurDao  =  (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
 			Collaborateur collaborateur = jpaCollaborateurDao.findCollaborateurById(idParam);
+			JpaRoleDao jpaRoleDao  =  (JpaRoleDao) DaoFactory.RoleDF();
+			Collection<Role> roles = jpaRoleDao.getAllRoles();	
+			request.setAttribute("roles", roles); 
 			System.out.println(collaborateur.getId());
 			request.setAttribute("collaborateur", collaborateur);
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/showCollaborateur.jsp");
 			rs.forward(request, response);
 		} else {
+			JpaRoleDao jpaRoleDao  =  (JpaRoleDao) DaoFactory.RoleDF();
+			Collection<Role> roles = jpaRoleDao.getAllRoles();	
+			request.setAttribute("roles", roles); 
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/selectCollaborateur.jsp");
 			rs.forward(request, response);
 		}
