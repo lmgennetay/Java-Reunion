@@ -18,7 +18,7 @@ import fr.cesi.bibliotheque.entity.Role;
 /**
  * Servlet implementation class addCollaborateur
  */
-@WebServlet("/addCollaborateur")
+@WebServlet("/addCollaborateurServlet")
 public class addCollaborateurServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
