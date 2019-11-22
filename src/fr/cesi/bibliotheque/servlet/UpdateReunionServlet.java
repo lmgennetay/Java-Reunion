@@ -3,6 +3,7 @@ package fr.cesi.bibliotheque.servlet;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -41,12 +42,12 @@ public class UpdateReunionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArrayList<Collaborateur> listeCollaborateurs = new ArrayList<Collaborateur>();
+		JpaCollaborateurDao jpaCollaborateurDao  =  (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
+		JpaReunionDao jpaReunionDao  =  (JpaReunionDao) DaoFactory.ReunionDF();
+		JpaTacheDao jpaTacheDao  =  (JpaTacheDao) DaoFactory.TacheDF();
+		
 		if (request.getParameter("id") != null) {
-			//DAO
-			JpaReunionDao jpaReunionDao  =  (JpaReunionDao) DaoFactory.ReunionDF();
-			JpaCollaborateurDao jpaCollaborateurDao  =  (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
-			JpaTacheDao jpaTacheDao  =  (JpaTacheDao) DaoFactory.TacheDF();
-			
 			//Conversion date_reunion
 			String date = request.getParameter("date_reunion");			
 			Date date_reunion = new SimpleDateFormat("dd/MM/yyyy").parse(date);
@@ -56,9 +57,8 @@ public class UpdateReunionServlet extends HttpServlet {
 			Collaborateur referent = jpaCollaborateurDao.findCollaborateurById(id_referent);	
 			
 			//Recuperation liste collaborateurs	
-			ArrayList<Collaborateur> listeCollaborateurs = new ArrayList<Collaborateur>();
 			Collaborateur collaborateur = new Collaborateur();
-			for (int id_collaborateur : request.getParameter("listeCollaborateurs")) {
+			for (int id_collaborateur : request.getParameterValues("listeCollaborateurs")) {
 				collaborateur = jpaCollaborateurDao.findCollaborateurById(id_collaborateur);
 				listeCollaborateurs.add(collaborateur);
 			}
@@ -84,7 +84,8 @@ public class UpdateReunionServlet extends HttpServlet {
 			
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/menuAdmin.jsp");
         	rs.forward(request, response);
-		} else {
+		} else {	
+			Reunion reunion = jpaReunionDao.findReunionById(Integer.parseInt(request.getParameter("id_reunion")));
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/selectReunion.jsp");
 			rs.forward(request, response);
 		}
