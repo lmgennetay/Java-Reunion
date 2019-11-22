@@ -53,7 +53,7 @@ public class updateCollaborateurServlet extends HttpServlet {
 			collaborateur.setPrenom(prenom);
 			collaborateur.setMail(email);
 			collaborateur.setRole(role);
-			System.out.println("mon role est "+collaborateur.getNom());
+			System.out.println("mon id est "+collaborateur.getId());
 			jpaCollaborateurDao.updateCollaborateur(collaborateur);
 			
 			RequestDispatcher rs = request.getRequestDispatcher("/listCollaborateurServlet");

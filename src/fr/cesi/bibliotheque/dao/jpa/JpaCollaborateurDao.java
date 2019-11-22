@@ -47,11 +47,15 @@ private EntityManagerFactory emf;
 	 * @param collaborateur
 	 */
 	public void updateCollaborateur(Collaborateur collaborateur) {
-		int index = getCollaborateurIndexById(collaborateur.getId());
-		if(index > -1) {
-			collaborateurs.set(index, collaborateur);
-		} else {
-			System.out.println(collaborateur.getId());
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction t = em.getTransaction();
+		try {
+			t.begin();
+				em.merge(collaborateur);
+			t.commit();
+		} finally {
+			if (t.isActive()) t.rollback();
+			em.close();
 		}
 	}	
 	
@@ -63,6 +67,7 @@ private EntityManagerFactory emf;
 	public Collaborateur findCollaborateurById(int id) {
 		EntityManager em = emf.createEntityManager();		
 		Collaborateur collaborateur = em.find(Collaborateur.class, id);
+		System.out.println(collaborateur);
 		em.close();
 		return collaborateur;
 	}
@@ -104,9 +109,11 @@ private EntityManagerFactory emf;
 	 * @return
 	 */
 	public int getCollaborateurIndexById(int id) {
+		System.out.println(collaborateurs.size());
 		for (int i = 0; i < collaborateurs.size(); i++) {
 			Collaborateur collaborateur = collaborateurs.get(i);
-			if(collaborateur.getId() == id) {
+			System.out.println(collaborateur.getId()+" - "+ id+" - "+ i);
+			if(collaborateur.getId() == id) {				
 				return i;
 			}
 		}
