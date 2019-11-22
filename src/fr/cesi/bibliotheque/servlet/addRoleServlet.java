@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.cesi.bibliotheque.dao.DaoFactory;
-import fr.cesi.bibliotheque.dao.jpa.JpaLivreDao;
 import fr.cesi.bibliotheque.dao.jpa.JpaRoleDao;
 import fr.cesi.bibliotheque.entity.Role;
 

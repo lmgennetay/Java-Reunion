@@ -34,7 +34,7 @@ public class updateCollaborateurServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getParameter("id") != null) {
+		if (request.getParameter("nom") != null && request.getParameter("prenom") != null) {
 			int idParam = Integer.parseInt(request.getParameter("id"));
 			String nom = request.getParameter("nom");
 			String prenom = request.getParameter("prenom");
@@ -56,7 +56,11 @@ public class updateCollaborateurServlet extends HttpServlet {
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/menuAdmin.jsp");
         	rs.forward(request, response);
 		} else {
-			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/selectCollaborateur.jsp");
+			int idParam = Integer.parseInt(request.getParameter("id"));
+			JpaCollaborateurDao jpaCollaborateurDao  =  (JpaCollaborateurDao) DaoFactory.CollaborateurDF();
+			Collaborateur collaborateur = jpaCollaborateurDao.findCollaborateurById(idParam);
+			request.setAttribute("collaborateur", collaborateur);
+			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/addCollaborateur.jsp");
 			rs.forward(request, response);
 		}
 	}
