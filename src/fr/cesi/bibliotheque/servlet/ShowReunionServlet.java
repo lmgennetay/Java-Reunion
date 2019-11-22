@@ -35,9 +35,9 @@ public class ShowReunionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub		
 		if ( request.getParameter("id") != null  ) {
-			int id = Integer.parseInt(request.getParameter("id")); 
+			int id = Integer.parseInt(request.getParameter("id"));
 			JpaReunionDao jpaReunionDao  =  (JpaReunionDao) DaoFactory.ReunionDF();
-			Reunion reunion = jpaReunionDao.findReunionById(id) ;
+			Reunion reunion = jpaReunionDao.findReunionById(id);
 			System.out.println(reunion.getId());
 			request.setAttribute("reunion", reunion);
 			RequestDispatcher rs = request.getRequestDispatcher("WEB-INF/jsp/showReunion.jsp");

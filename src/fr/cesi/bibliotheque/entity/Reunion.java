@@ -3,9 +3,11 @@ package fr.cesi.bibliotheque.entity;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,8 +35,8 @@ public class Reunion {
 	private Collaborateur collaborateurReferent;
 
 	// Participe
-	@ManyToMany
-	private List<Collaborateur> collaborateursParticipants = new ArrayList<Collaborateur>();
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Collection<Collaborateur> collaborateursParticipants = new LinkedHashSet<Collaborateur>();
 	
 	public Reunion() {
 	}
@@ -83,7 +85,7 @@ public class Reunion {
 		this.collaborateurReferent = collaborateurReferent;
 	}
 
-	public List<Collaborateur> getCollaborateursParticipants() {
+	public Collection<Collaborateur> getCollaborateursParticipants() {
 		return collaborateursParticipants;
 	}
 
